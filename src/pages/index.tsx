@@ -1,6 +1,6 @@
 import { SignIn, SignInButton, useUser } from "@clerk/clerk-react";
 import Head from "next/head";
-import { api } from "~/utils/api";
+import { type RouterOutputs, api } from "~/utils/api";
 
 const ProfileWrapper = () => {
   const { user } = useUser();
@@ -20,6 +20,19 @@ const ProfileWrapper = () => {
     </div>
   );
 };
+
+type PostWithUser = RouterOutputs["posts"]["getAll"][number];
+
+const PostView = (props: PostWithUser) => {
+  const { post, author } = props;
+  return (
+    <div key={post.id} className="border-b border-slate-400 p-8">
+      <img src={author?.profileImageUrl} alt={"author img"} />
+      {post.content}
+    </div>
+  );
+};
+
 export default function Home() {
   const { data } = api.posts.getAll.useQuery();
   const user = useUser();
@@ -36,8 +49,8 @@ export default function Home() {
         <div>{!!user.isSignedIn && <ProfileWrapper />}</div>
         <SignIn />
         <div>
-          {data?.map(({ post, author }) => (
-            <div key={post.id}>{post.content}</div>
+          {data?.map((v) => (
+            <PostView key={v.post.id} {...v} />
           ))}
         </div>
       </main>
