@@ -1,16 +1,9 @@
-import {
-  SignIn,
-  SignInButton,
-  SignOutButton,
-  useUser,
-} from "@clerk/clerk-react";
+import { SignIn, SignInButton, useUser } from "@clerk/clerk-react";
 import Head from "next/head";
-import Link from "next/link";
 import { api } from "~/utils/api";
 
 const ProfileWrapper = () => {
   const { user } = useUser();
-  console.log(user);
   if (!user) return null;
 
   return (
