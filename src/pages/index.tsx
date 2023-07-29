@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { SignIn, SignInButton, useUser } from "@clerk/clerk-react";
+import dayjs from "dayjs";
 import Head from "next/head";
 import { type RouterOutputs, api } from "~/utils/api";
 
@@ -35,6 +37,9 @@ const PostView = (props: PostWithUser) => {
         src={author?.profileImageUrl}
         alt={"author img"}
       />
+      <div>
+        <span className="font-thin">{`${dayjs(post.createdAt)}`}</span>
+      </div>
       {post.content}
     </div>
   );
