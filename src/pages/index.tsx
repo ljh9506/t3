@@ -2,6 +2,7 @@
 import { SignIn, SignInButton, useUser } from "@clerk/clerk-react";
 import dayjs from "dayjs";
 import Head from "next/head";
+import Image from "next/image";
 import { type RouterOutputs, api } from "~/utils/api";
 
 const ProfileWrapper = () => {
@@ -10,7 +11,7 @@ const ProfileWrapper = () => {
 
   return (
     <div className="flex w-full gap-3 p-6">
-      <img
+      <Image
         className="block h-16 w-16 max-w-xs rounded-full"
         src={user.profileImageUrl}
         alt="Profile Image"
@@ -32,7 +33,7 @@ const PostView = (props: PostWithUser) => {
       key={post.id}
       className="flex items-center gap-x-3 border-b border-slate-400 p-8"
     >
-      <img
+      <Image
         className="h-14 w-14 rounded-full"
         src={author?.profileImageUrl}
         alt={"author img"}
